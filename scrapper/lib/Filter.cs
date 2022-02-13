@@ -8,24 +8,27 @@ namespace scrapper.lib
     {
         protected HtmlDocument _document { get; set; }
         protected string _documentString { get; set; }
-        protected List<JToken> Tokens { get; set; }
+        public string RawHtmlString { get; set; }
+        public JArray Tokens { get; set; }
+        public string OriginalJString { get; set; }
 
         public Filter(HtmlDocument document, string where)
         {
             _document = document;
-            //substitue in a settings file
+            RawHtmlString = _document.DocumentNode.OuterHtml;
             _documentString = document.DocumentNode.SelectSingleNode(where).InnerText;
-            File.WriteAllText("example.json",_documentString);
+            OriginalJString = _documentString;
+
 
         }
-        protected JObject ConvertToJson() => JObject.Parse(_documentString);
+        public JObject ConvertToJson() => JObject.Parse(_documentString);
 
         protected void RemoveJavaScript(string remove)
         {
             _documentString = _documentString.Replace(remove, "");
             _documentString = _documentString.Remove(_documentString.Length - 1, 1);
         }
-        
+
         public List<string> DoFilter(string field) => Tokens.Filter<JToken>(field);
 
         public void WriteTokensToFile()

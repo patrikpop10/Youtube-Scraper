@@ -1,5 +1,8 @@
 using System.Threading.Channels;
 using database;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
 namespace scrapper.lib
 {
     public class Consumer
@@ -14,32 +17,50 @@ namespace scrapper.lib
         {
             while (await _reader.WaitToReadAsync())
             {
+                var item = await _reader.ReadAsync();
                 try
                 {
-                    var item = await _reader.ReadAsync();
+
                     Console.WriteLine("Reading...");
                     var b = item.Dowload();
+
 
                     if (item.HtmlDownloader.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         var filter = new TrendingFilterer(b, Program.configuration["trending:xPath"], Program.configuration["trending:javascriptToRemove"]);
-                        filter.WriteTokensToFile();
-                        var ids = filter.DoFilter("videoId");
-                        Console.WriteLine($"Reading {ids[1]}");
 
+                        var code = JObject.Parse(filter.OriginalJString).SelectToken("topbar.desktopTopbarRenderer.countryCode")?.ToString() ?? "US";
+
+                        if (item.CountryCode != code)
+                        {
+                            throw new Exception("Not the wanted country");
+                        }
+
+                        var videoIds = filter.Tokens.SelectTokens("trendingArray[*].videoRenderer.videoId").ToList();
+                        foreach (var id in videoIds)
+                        {
+                          
+                          Collector collector = new Collector(id.ToString());
+                          collector.Collect();
+                          //Collector.Persist();
+                        }
+                    
                     }
                     else
                     {
+
                         Console.WriteLine($"Could not crawl, status code was: {item.HtmlDownloader.StatusCode}");
                     }
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e);
+                    if (e.Message != "Not the wanted country")
+                    {
+                        var b = item.CountryCode;
+                        Console.WriteLine(e);
+                    }
+
                 }
-
-
-
             }
         }
 

@@ -6,15 +6,17 @@ namespace scrapper.lib
 {
     public class TrendingFilterer : Filter
     {
+        public JObject Tokens {get; set;}
         public TrendingFilterer(HtmlDocument document, string where, string remove) : base(document, where)
         {
             RemoveJavaScript(remove);
+            OriginalJString = _documentString;
             Tokens = Prepare();
         }
 
 
 
-        private List<JToken> Prepare()
+        private JObject Prepare()
         {
             var contents = ConvertToJson().SelectToken("contents.twoColumnBrowseResultsRenderer.tabs[0].tabRenderer.content.sectionListRenderer.contents")
                                             ?.ToList();
@@ -28,11 +30,11 @@ namespace scrapper.lib
             json = json.Replace("]]", "]");
             json = json.Replace("],[", ",");
             json = json.Replace("],null,[", ",");
-
-            var jsonArray = JArray.Parse(json);
-            var TokenList = jsonArray.Select(m => m.SelectToken("videoRenderer")).ToList();
-
-            return TokenList;
+            json = json.Prepend("{\"trendingArray\" :");
+            json = json.Append("}");
+            File.WriteAllText("./data/debug2.json", json);
+            return JObject.Parse(json);
+             
         }
     }
 }

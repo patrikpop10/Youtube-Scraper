@@ -5,7 +5,7 @@ namespace scrapper.lib
 {
     public class Producer
     {
-       private ChannelWriter<Downloader> _writer {get; set;}
+        private ChannelWriter<Downloader> _writer { get; set; }
 
         public Producer(ChannelWriter<Downloader> writer)
         {
@@ -15,26 +15,31 @@ namespace scrapper.lib
 
         private async Task Run()
         {
-            var r = new Random();
-            while(await _writer.WaitToWriteAsync())
+
+            while (await _writer.WaitToWriteAsync())
             {
                 var countries = new List<string>();
                 Program.configuration.GetSection("countries_ISO2").Bind(countries);
-                foreach(var country in countries)
+                foreach (var country in countries)
                 {
                     try
                     {
-                    var downloader = new Downloader(Program.configuration["trending:endPoint"]+country);
-                    Console.WriteLine($"Producing for {country}");
-                    await _writer.WriteAsync(downloader);
+                        var downloader = new Downloader(Program.configuration["trending:endPoint"] + country);
+                        downloader.CountryCode = country;
+                        Console.WriteLine($"Producing for {country}");
+                        await _writer.WriteAsync(downloader);
                     }
-                    catch(Exception e)
+                    catch (Exception e)
                     {
                         Console.WriteLine(e);
                     }
-                 
+
                 }
-                  
+                Console.WriteLine("*********************");
+                Console.WriteLine("SLEEPING FOR 1 Minute");
+                Console.WriteLine("*********************");
+                Thread.Sleep((int)TimeSpan.FromMinutes(1).TotalMilliseconds);
+
             }
         }
     }
