@@ -203,6 +203,10 @@
               "target": "Package",
               "version": "[1.11.42, )"
             },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.2, )"
+            },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
               "version": "[6.0.2-mauipre.1.22054.8, )"

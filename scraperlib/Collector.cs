@@ -59,7 +59,7 @@ namespace scrapperlib
                 
                 //var finalObject = JObject.Parse($" \"iframe\": {iFrame}, \"title\": {title}, \"description\": {description}, \"familyFriendly\": {isFamilyFriendly}, \"viewCount\":{viewCount}, publishDate:{publishDate}, \"category\": {category}, \"lengthInSeconds\":{lengthSeconds}, \"channelName\": {ownerChannelName}, \"subscriberCountText\": {subscriberCountText}");
               
-                var video = new scrapperlib.Models.Video()
+                var video = new Video()
                 {
                     VideoId = _id,
                     Length = TimeSpan.FromSeconds(double.Parse(lengthSeconds)),
@@ -118,9 +118,6 @@ namespace scrapperlib
             ownerChannelName = videoFilter.Details.SelectToken(ConfigurationRoot["video:jsonPaths:ownerChannelName"]).ToString();
             
         }
-        internal static void Persist()
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
