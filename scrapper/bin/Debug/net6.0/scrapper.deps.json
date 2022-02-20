@@ -13,7 +13,8 @@
           "Microsoft.Extensions.Configuration.Binder": "6.0.2-mauipre.1.22054.8",
           "Microsoft.Extensions.Configuration.Json": "6.0.2-mauipre.1.22054.8",
           "Newtonsoft.Json": "13.0.1",
-          "database": "1.0.0"
+          "database": "1.0.0",
+          "scraperlib": "1.0.0"
         },
         "runtime": {
           "scrapper.dll": {}
@@ -342,6 +343,19 @@
         "runtime": {
           "database.dll": {}
         }
+      },
+      "scraperlib/1.0.0": {
+        "dependencies": {
+          "HtmlAgilityPack": "1.11.42",
+          "Microsoft.Extensions.Configuration": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Configuration.Binder": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Configuration.Json": "6.0.2-mauipre.1.22054.8",
+          "Newtonsoft.Json": "13.0.1",
+          "database": "1.0.0"
+        },
+        "runtime": {
+          "scraperlib.dll": {}
+        }
       }
     }
   },
@@ -555,6 +569,11 @@
       "hashPath": "system.text.json.6.0.2-mauipre.1.22054.8.nupkg.sha512"
     },
     "database/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "scraperlib/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

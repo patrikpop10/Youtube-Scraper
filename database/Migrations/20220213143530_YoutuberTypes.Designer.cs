@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using database;
@@ -11,9 +12,10 @@ using database;
 namespace database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220213143530_YoutuberTypes")]
+    partial class YoutuberTypes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -182,10 +184,9 @@ namespace database.Migrations
                     b.Property<string>("type")
                         .HasColumnType("text");
 
-                    b.HasKey("Id")
-                        .HasName("youtuber_type_id");
+                    b.HasKey("Id");
 
-                    b.ToTable("yotuber_type", (string)null);
+                    b.ToTable("YoutuberTypes");
                 });
 
             modelBuilder.Entity("database.Video", b =>

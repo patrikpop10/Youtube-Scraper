@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace scrapper.lib
+namespace scrapperlib
 {
     public static class MyExtensions
     {

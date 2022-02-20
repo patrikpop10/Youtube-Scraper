@@ -412,6 +412,24 @@
         "runtime": {
           "bin/placeholder/database.dll": {}
         }
+      },
+      "scraperlib/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "HtmlAgilityPack": "1.11.42",
+          "Microsoft.Extensions.Configuration": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Configuration.Binder": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Configuration.Json": "6.0.2-mauipre.1.22054.8",
+          "Newtonsoft.Json": "13.0.1",
+          "database": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/scraperlib.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/scraperlib.dll": {}
+        }
       }
     }
   },
@@ -1115,6 +1133,11 @@
       "type": "project",
       "path": "../database/database.csproj",
       "msbuildProject": "../database/database.csproj"
+    },
+    "scraperlib/1.0.0": {
+      "type": "project",
+      "path": "../scraperlib/scraperlib.csproj",
+      "msbuildProject": "../scraperlib/scraperlib.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -1124,7 +1147,8 @@
       "Microsoft.Extensions.Configuration.Binder >= 6.0.2-mauipre.1.22054.8",
       "Microsoft.Extensions.Configuration.Json >= 6.0.2-mauipre.1.22054.8",
       "Newtonsoft.Json >= 13.0.1",
-      "database >= 1.0.0"
+      "database >= 1.0.0",
+      "scraperlib >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -1156,6 +1180,9 @@
           "projectReferences": {
             "D:\\Projects\\Youtube Scrapper\\database\\database.csproj": {
               "projectPath": "D:\\Projects\\Youtube Scrapper\\database\\database.csproj"
+            },
+            "D:\\Projects\\Youtube Scrapper\\scraperlib\\scraperlib.csproj": {
+              "projectPath": "D:\\Projects\\Youtube Scrapper\\scraperlib\\scraperlib.csproj"
             }
           }
         }

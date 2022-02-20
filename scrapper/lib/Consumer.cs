@@ -2,6 +2,7 @@ using System.Threading.Channels;
 using database;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using scrapperlib;
 
 namespace scrapper.lib
 {
@@ -20,10 +21,7 @@ namespace scrapper.lib
                 var item = await _reader.ReadAsync();
                 try
                 {
-
-                    Console.WriteLine("Reading...");
                     var b = item.Dowload();
-
 
                     if (item.HtmlDownloader.StatusCode == System.Net.HttpStatusCode.OK)
                     {
@@ -35,20 +33,12 @@ namespace scrapper.lib
                         {
                             throw new Exception("Not the wanted country");
                         }
-
                         var videoIds = filter.Tokens.SelectTokens("trendingArray[*].videoRenderer.videoId").ToList();
-                        foreach (var id in videoIds)
-                        {
-                          
-                          Collector collector = new Collector(id.ToString());
-                          collector.Collect();
-                          //Collector.Persist();
-                        }
-                    
+
+                        Consume(videoIds, item.CountryCode);
                     }
                     else
                     {
-
                         Console.WriteLine($"Could not crawl, status code was: {item.HtmlDownloader.StatusCode}");
                     }
                 }
@@ -64,5 +54,23 @@ namespace scrapper.lib
             }
         }
 
+        private static void Consume(List<JToken> videoIds, string countryCode)
+        {
+            foreach (var id in videoIds)
+            {
+                Collector collector = new Collector(id.ToString(), countryCode, Program.configuration);
+                collector.Collect();
+            }
+        }
+
+        private static void ConsumeInParallel(List<JToken> videoIds, string countryCode)
+        {
+            Parallel.ForEach(videoIds, id =>
+            {
+                //Pass db instance
+                Collector collector = new Collector(id.ToString(), countryCode, Program.configuration);
+                collector.Collect();
+            });
+        }
     }
 }

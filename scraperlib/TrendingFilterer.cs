@@ -2,7 +2,7 @@ using HtmlAgilityPack;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace scrapper.lib
+namespace scrapperlib
 {
     public class TrendingFilterer : Filter
     {
@@ -32,7 +32,7 @@ namespace scrapper.lib
             json = json.Replace("],null,[", ",");
             json = json.Prepend("{\"trendingArray\" :");
             json = json.Append("}");
-            File.WriteAllText("./data/debug2.json", json);
+            //File.WriteAllText("./data/debug2.json", json);
             return JObject.Parse(json);
              
         }

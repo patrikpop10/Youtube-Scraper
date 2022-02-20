@@ -8,6 +8,8 @@ namespace database
         public DbSet<VideoCache> VideoCaches { get; set; }
         public DbSet<Youtuber> Youtubers { get; set; }
         public DbSet<YoutuberCache> YoutuberCaches { get; set; }
+        public DbSet<Category> VideoCategories {get; set;}
+        public DbSet<YoutuberType> YoutuberTypes {get; set;}
 
 
         public DatabaseContext()
@@ -86,6 +88,8 @@ namespace database
                 e.Property(e => e.UserName).HasColumnName("username").HasColumnType("varchar");
 
                 e.HasMany(e => e.YoutuberCache).WithOne(e => e.Youtuber);
+
+                e.HasOne(e => e.YoutuberType).WithMany(e => e.Youtubers);
             });
 
             modelBuilder.Entity<YoutuberCache>(e =>
@@ -113,6 +117,15 @@ namespace database
                 e.Property(e => e.CategoryString).HasColumnName("category").HasColumnType("varchar");
 
             });
+            
+            modelBuilder.Entity<YoutuberType>(e =>
+            {
+                e.HasKey(e =>e.Id).HasName("youtuber_type_id");
+
+                e.ToTable("yotuber_type");
+
+            }
+            );
         }
 
     }

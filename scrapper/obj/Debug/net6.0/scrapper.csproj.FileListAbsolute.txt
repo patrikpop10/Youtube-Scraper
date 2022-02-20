@@ -43,3 +43,5 @@ D:\Projects\Youtube Scrapper\scrapper\bin\Debug\net6.0\Microsoft.Extensions.Logg
 D:\Projects\Youtube Scrapper\scrapper\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
 D:\Projects\Youtube Scrapper\scrapper\bin\Debug\net6.0\Npgsql.dll
 D:\Projects\Youtube Scrapper\scrapper\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+D:\Projects\Youtube Scrapper\scrapper\bin\Debug\net6.0\scraperlib.dll
+D:\Projects\Youtube Scrapper\scrapper\bin\Debug\net6.0\scraperlib.pdb

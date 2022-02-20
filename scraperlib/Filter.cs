@@ -2,7 +2,7 @@ using HtmlAgilityPack;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace scrapper.lib
+namespace scrapperlib
 {
     public class Filter
     {
@@ -14,10 +14,18 @@ namespace scrapper.lib
 
         public Filter(HtmlDocument document, string where)
         {
-            _document = document;
-            RawHtmlString = _document.DocumentNode.OuterHtml;
-            _documentString = document.DocumentNode.SelectSingleNode(where).InnerText;
-            OriginalJString = _documentString;
+            try
+            {
+                _document = document;
+                RawHtmlString = _document.DocumentNode.OuterHtml;
+                _documentString = document.DocumentNode.SelectSingleNode(where).InnerText;
+                OriginalJString = _documentString;
+            }
+            catch
+            {
+
+                _documentString = document.DocumentNode.SelectSingleNode("//script[contains(., 'gostos')]")?.InnerText ?? "0";
+            }
 
 
         }
@@ -26,6 +34,7 @@ namespace scrapper.lib
         protected void RemoveJavaScript(string remove)
         {
             _documentString = _documentString.Replace(remove, "");
+            _documentString = _documentString.Replace("var ytInitialData = ", "");
             _documentString = _documentString.Remove(_documentString.Length - 1, 1);
         }
 

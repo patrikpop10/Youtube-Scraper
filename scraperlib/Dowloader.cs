@@ -1,6 +1,6 @@
 using HtmlAgilityPack;
 
-namespace scrapper.lib
+namespace scrapperlib
 {
     public class Downloader
     {

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using scrapper.lib;
 using System.Threading.Tasks;
+using scrapperlib;
 
 namespace scrapper
 {

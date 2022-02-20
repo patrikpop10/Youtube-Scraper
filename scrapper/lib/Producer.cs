@@ -1,5 +1,6 @@
 using System.Threading.Channels;
 using Microsoft.Extensions.Configuration;
+using scrapperlib;
 
 namespace scrapper.lib
 {
@@ -26,7 +27,6 @@ namespace scrapper.lib
                     {
                         var downloader = new Downloader(Program.configuration["trending:endPoint"] + country);
                         downloader.CountryCode = country;
-                        Console.WriteLine($"Producing for {country}");
                         await _writer.WriteAsync(downloader);
                     }
                     catch (Exception e)

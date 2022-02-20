@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
@@ -13,12 +12,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.2-mauipre.1.22054.8" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.2-mauipre.1.22054.8" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\database\database.csproj" />
-    <ProjectReference Include="..\scraperlib\scraperlib.csproj" />
   </ItemGroup>
 
 </Project>

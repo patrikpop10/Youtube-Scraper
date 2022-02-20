@@ -76,6 +76,86 @@
         }
       }
     },
+    "D:\\Projects\\Youtube Scrapper\\scraperlib\\scraperlib.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Projects\\Youtube Scrapper\\scraperlib\\scraperlib.csproj",
+        "projectName": "scraperlib",
+        "projectPath": "D:\\Projects\\Youtube Scrapper\\scraperlib\\scraperlib.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "D:\\Projects\\Youtube Scrapper\\scraperlib\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "D:\\Projects\\Youtube Scrapper\\database\\database.csproj": {
+                "projectPath": "D:\\Projects\\Youtube Scrapper\\database\\database.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "HtmlAgilityPack": {
+              "target": "Package",
+              "version": "[1.11.42, )"
+            },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[6.0.2-mauipre.1.22054.8, )"
+            },
+            "Microsoft.Extensions.Configuration.Binder": {
+              "target": "Package",
+              "version": "[6.0.2-mauipre.1.22054.8, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[6.0.2-mauipre.1.22054.8, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "D:\\Projects\\Youtube Scrapper\\scrapper\\scrapper.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -102,6 +182,9 @@
             "projectReferences": {
               "D:\\Projects\\Youtube Scrapper\\database\\database.csproj": {
                 "projectPath": "D:\\Projects\\Youtube Scrapper\\database\\database.csproj"
+              },
+              "D:\\Projects\\Youtube Scrapper\\scraperlib\\scraperlib.csproj": {
+                "projectPath": "D:\\Projects\\Youtube Scrapper\\scraperlib\\scraperlib.csproj"
               }
             }
           }

@@ -19,6 +19,17 @@
             "name": ".NET Core Attach",
             "type": "coreclr",
             "request": "attach"
+        },
+        {
+            "name": "API",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/YoutubeApi/bin/Debug/net6.0/YoutubeApi.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/YoutubeApi",
+            "console": "internalConsole",
+            "stopAtEntry": false
         }
     ]
 }
