@@ -125,6 +125,19 @@
           "lib/netstandard2.0/Microsoft.Extensions.Configuration.Binder.dll": {}
         }
       },
+      "Microsoft.Extensions.Configuration.EnvironmentVariables/6.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Configuration": "6.0.0",
+          "Microsoft.Extensions.Configuration.Abstractions": "6.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.Extensions.Configuration.EnvironmentVariables.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Configuration.EnvironmentVariables.dll": {}
+        }
+      },
       "Microsoft.Extensions.Configuration.FileExtensions/6.0.2-mauipre.1.22054.8": {
         "type": "package",
         "dependencies": {
@@ -630,6 +643,25 @@
         "lib/netstandard2.0/Microsoft.Extensions.Configuration.Binder.xml",
         "microsoft.extensions.configuration.binder.6.0.2-mauipre.1.22054.8.nupkg.sha512",
         "microsoft.extensions.configuration.binder.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
+    "Microsoft.Extensions.Configuration.EnvironmentVariables/6.0.1": {
+      "sha512": "pnyXV1LFOsYjGveuC07xp0YHIyGq7jRq5Ncb5zrrIieMLWVwgMyYxcOH0jTnBedDT4Gh1QinSqsjqzcieHk1og==",
+      "type": "package",
+      "path": "microsoft.extensions.configuration.environmentvariables/6.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/Microsoft.Extensions.Configuration.EnvironmentVariables.dll",
+        "lib/net461/Microsoft.Extensions.Configuration.EnvironmentVariables.xml",
+        "lib/netstandard2.0/Microsoft.Extensions.Configuration.EnvironmentVariables.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.Configuration.EnvironmentVariables.xml",
+        "microsoft.extensions.configuration.environmentvariables.6.0.1.nupkg.sha512",
+        "microsoft.extensions.configuration.environmentvariables.nuspec",
         "useSharedDesignerContext.txt"
       ]
     },
@@ -1146,6 +1178,7 @@
       "Microsoft.EntityFrameworkCore >= 6.0.2",
       "Microsoft.Extensions.Configuration >= 6.0.2-mauipre.1.22054.8",
       "Microsoft.Extensions.Configuration.Binder >= 6.0.2-mauipre.1.22054.8",
+      "Microsoft.Extensions.Configuration.EnvironmentVariables >= 6.0.1",
       "Microsoft.Extensions.Configuration.Json >= 6.0.2-mauipre.1.22054.8",
       "Newtonsoft.Json >= 13.0.1",
       "database >= 1.0.0",
@@ -1213,6 +1246,10 @@
           "Microsoft.Extensions.Configuration.Binder": {
             "target": "Package",
             "version": "[6.0.2-mauipre.1.22054.8, )"
+          },
+          "Microsoft.Extensions.Configuration.EnvironmentVariables": {
+            "target": "Package",
+            "version": "[6.0.1, )"
           },
           "Microsoft.Extensions.Configuration.Json": {
             "target": "Package",

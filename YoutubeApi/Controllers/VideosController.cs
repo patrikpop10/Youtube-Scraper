@@ -13,8 +13,8 @@ namespace YoutubeApi.Controllers
         [HttpGet("{id}")]
         public ActionResult<Video> GetVideo(string id)
         {
-         var collector = new Collector(id, scrapper.Program.configuration);
-         return collector.Collect();
+         var collector = new Collector(id, Program.configuration);
+         return collector.Collect(id);
         }
 
         
@@ -24,8 +24,8 @@ namespace YoutubeApi.Controllers
             var listOfvideos = new List<Video>();
             foreach(var id in listOfIds)
             {
-                var collector = new Collector(id, scrapper.Program.configuration);
-                listOfvideos.Add(collector.Collect());
+                var collector = new Collector(id, Program.configuration);
+                listOfvideos.Add(collector.Collect(id));
             }
             return listOfvideos;
         }

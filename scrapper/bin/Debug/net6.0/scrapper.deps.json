@@ -12,6 +12,7 @@
           "Microsoft.EntityFrameworkCore": "6.0.2",
           "Microsoft.Extensions.Configuration": "6.0.2-mauipre.1.22054.8",
           "Microsoft.Extensions.Configuration.Binder": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Configuration.EnvironmentVariables": "6.0.1",
           "Microsoft.Extensions.Configuration.Json": "6.0.2-mauipre.1.22054.8",
           "Newtonsoft.Json": "13.0.1",
           "database": "1.0.0",
@@ -124,6 +125,18 @@
           "lib/netstandard2.0/Microsoft.Extensions.Configuration.Binder.dll": {
             "assemblyVersion": "6.0.0.0",
             "fileVersion": "6.0.222.5408"
+          }
+        }
+      },
+      "Microsoft.Extensions.Configuration.EnvironmentVariables/6.0.1": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration": "6.0.2-mauipre.1.22054.8",
+          "Microsoft.Extensions.Configuration.Abstractions": "6.0.2-mauipre.1.22054.8"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Configuration.EnvironmentVariables.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.222.6406"
           }
         }
       },
@@ -435,6 +448,13 @@
       "sha512": "sha512-SpipikruG3PE6sk5xn/fh54o2cuMkWlQbHhoixG424/kyPLdsgjN1sRm6Vmo5E+MRckR9+k+2gysGj+aLu0Bwg==",
       "path": "microsoft.extensions.configuration.binder/6.0.2-mauipre.1.22054.8",
       "hashPath": "microsoft.extensions.configuration.binder.6.0.2-mauipre.1.22054.8.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Configuration.EnvironmentVariables/6.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pnyXV1LFOsYjGveuC07xp0YHIyGq7jRq5Ncb5zrrIieMLWVwgMyYxcOH0jTnBedDT4Gh1QinSqsjqzcieHk1og==",
+      "path": "microsoft.extensions.configuration.environmentvariables/6.0.1",
+      "hashPath": "microsoft.extensions.configuration.environmentvariables.6.0.1.nupkg.sha512"
     },
     "Microsoft.Extensions.Configuration.FileExtensions/6.0.2-mauipre.1.22054.8": {
       "type": "package",

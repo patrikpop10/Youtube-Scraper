@@ -59,7 +59,7 @@ namespace scrapper.lib
             foreach (var id in videoIds)
             {
                 Collector collector = new Collector(id.ToString(), countryCode, Program.configuration);
-                collector.Collect();
+                collector.Collect(id.ToString());
             }
         }
 
@@ -69,7 +69,7 @@ namespace scrapper.lib
             {
                 //Pass db instance
                 Collector collector = new Collector(id.ToString(), countryCode, Program.configuration);
-                collector.Collect();
+                collector.Collect(id.ToString());
             });
         }
     }

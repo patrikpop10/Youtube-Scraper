@@ -32,7 +32,7 @@ namespace scrapperlib
             json = json.Replace("],null,[", ",");
             json = json.Prepend("{\"trendingArray\" :");
             json = json.Append("}");
-            //File.WriteAllText("./data/debug2.json", json);
+           
             return JObject.Parse(json);
              
         }

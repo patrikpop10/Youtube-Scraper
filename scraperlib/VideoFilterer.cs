@@ -13,14 +13,12 @@ namespace scrapperlib
             Details = Prepare(path, multiple);
 
         }
-        public JObject Prepare(string jsonPath)
+        public List<JToken> SelectTokens(string jsonPath)
         {
 
-            var contents = ConvertToJson().SelectToken(jsonPath);
-            var stringContent = contents.ToString();
-            var json = JObject.Parse(stringContent);
-
-            return json;
+            var contents = ConvertToJson().SelectTokens(jsonPath);
+            return contents.ToList();
+            
         }
         public JObject Prepare(string jsonPath, bool multiple)
         {
@@ -29,7 +27,7 @@ namespace scrapperlib
             {
                 if (multiple)
                 {
-                    var contents = ConvertToJson().SelectToken(jsonPath);
+                    var contents = ConvertToJson().SelectTokens(jsonPath);
                     var stringContent = contents.ToString();
                     json = JObject.Parse(stringContent);
                     return json;

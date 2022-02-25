@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },
+        {
             "name": ".NET Core Launch (console)",
             "type": "coreclr",
             "request": "launch",
@@ -12,6 +19,17 @@
             "program": "${workspaceFolder}/scrapper/bin/Debug/net6.0/scrapper.dll",
             "args": [],
             "cwd": "${workspaceFolder}/scrapper",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "test debug",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/test/bin/Debug/net6.0/test.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/test",
             "console": "internalConsole",
             "stopAtEntry": false
         },
@@ -30,6 +48,15 @@
             "cwd": "${workspaceFolder}/YoutubeApi",
             "console": "internalConsole",
             "stopAtEntry": false
+        },
+        {
+            "name": "Docker .NET Core Launch",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "docker-run: debug",
+            "netCore": {
+                "appProject": "${workspaceFolder}/YoutubeApi/YoutubeApi.csproj"
+            }
         }
     ]
 }

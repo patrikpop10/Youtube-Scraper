@@ -7,7 +7,7 @@ namespace scrapperlib
     {
         private string _id { get; set; }
         private string CountryCode { get; set; }
-        private IConfigurationRoot ConfigurationRoot {get; set;}
+        private IConfigurationRoot ConfigurationRoot { get; set; }
         public Collector(string id, string code, IConfigurationRoot configuration)
         {
             _id = id;
@@ -22,9 +22,9 @@ namespace scrapperlib
 
 
 
-        public Video Collect()
+        public Video Collect(string id)
         {
-            var videoDownloader = new Downloader(ConfigurationRoot["video:endPoint"] + _id);
+            var videoDownloader = new Downloader(ConfigurationRoot["video:endPoint"] + id);
             var videoHtml = videoDownloader.Dowload();
 
             //TODO: REFACTOR FILTERS
@@ -35,8 +35,8 @@ namespace scrapperlib
             var filterUser = new VideoFilterer(videoHtml, "//script[contains(., '\"subscriberCountText\"')]",
                                                ConfigurationRoot["video:javascriptToRemoveForSubs"],
                                                "contents.twoColumnWatchNextResults.results.results.contents[*].videoSecondaryInfoRenderer.owner.videoOwnerRenderer", true);
-            
-            //File.WriteAllText("data/debuglikes.json", filterUser.Details.ToString());
+
+
             string iFrame, isFamilyFriendly, viewCount, publishDate, category, lengthSeconds, owner, ownerChannelName, title, description;
             CollectData(videoFilter, out iFrame, out isFamilyFriendly, out title, out description, out viewCount, out publishDate, out category, out lengthSeconds, out owner, out ownerChannelName);
 
@@ -56,9 +56,9 @@ namespace scrapperlib
                 var likes = subsJObject.SelectToken(ConfigurationRoot["video:jsonPaths:likes"]) ?? "";
                 var final = $"\n {iFrame} \n title: {title} \n description: {description} is family friendly: {isFamilyFriendly} \n number of views: {viewCount} \n publish date: {publishDate} \n category: {category} \n length in seconds: {lengthSeconds} \n {ownerChannelName}: {subscriberCountText}";
                 Console.WriteLine(final);
-                
+
                 //var finalObject = JObject.Parse($" \"iframe\": {iFrame}, \"title\": {title}, \"description\": {description}, \"familyFriendly\": {isFamilyFriendly}, \"viewCount\":{viewCount}, publishDate:{publishDate}, \"category\": {category}, \"lengthInSeconds\":{lengthSeconds}, \"channelName\": {ownerChannelName}, \"subscriberCountText\": {subscriberCountText}");
-              
+
                 var video = new Video()
                 {
                     VideoId = _id,
@@ -80,11 +80,11 @@ namespace scrapperlib
 
 
                 };
-                
+
                 return video;
-                
+
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e);
                 return new Video();
@@ -105,7 +105,7 @@ namespace scrapperlib
                                          out string owner,
                                          out string ownerChannelName)
         {
-            iFrame = videoFilter.Details?.SelectToken(ConfigurationRoot["video:jsonPaths:iFrame"])?.ToString() ?? ""; 
+            iFrame = videoFilter.Details?.SelectToken(ConfigurationRoot["video:jsonPaths:iFrame"])?.ToString() ?? "";
             title = videoFilter.Details.SelectToken(ConfigurationRoot["video:jsonPaths:title"]).ToString();
             isFamilyFriendly = videoFilter.Details?.SelectToken(ConfigurationRoot["video:jsonPaths:isFamilyFriendly"]).ToString() ?? "true";
             description = videoFilter.Details.SelectToken(ConfigurationRoot["video:jsonPaths:description"])?.ToString() ?? "";
@@ -116,8 +116,27 @@ namespace scrapperlib
             lengthSeconds = videoFilter.Details.SelectToken(ConfigurationRoot["video:jsonPaths:lengthSeconds"]).ToString();
             owner = videoFilter.Details.SelectToken(ConfigurationRoot["video:jsonPaths:externalChannelId"]).ToString();
             ownerChannelName = videoFilter.Details.SelectToken(ConfigurationRoot["video:jsonPaths:ownerChannelName"]).ToString();
-            
+
         }
-        
+        public List<Video> YoutuberCollector(string channelId)
+        {
+            var videos = new List<Video>();
+            var youtberDownloader = new Downloader(ConfigurationRoot["youtuber:endpoint"] + channelId + "/videos");
+            var data = youtberDownloader.Dowload();
+            VideoFilterer vf = new VideoFilterer(data, ConfigurationRoot["youtuber:xPath"],
+            ConfigurationRoot["trending:javascriptToRemove"],
+            "contents.twoColumnBrowseResultsRenderer.tabs[*].tabRenderer.content.sectionListRenderer.contents[*].itemSectionRenderer.contents[*].gridRenderer.items[*].gridVideoRenderer.videoId", true);
+            var videoIds = vf.SelectTokens("contents.twoColumnBrowseResultsRenderer.tabs[*].tabRenderer.content.sectionListRenderer.contents[*].itemSectionRenderer.contents[*].gridRenderer.items[*].gridVideoRenderer.videoId").Select(token => token.ToString()).ToList();
+            
+            Parallel.ForEach(videoIds, id =>
+            {
+                videos.Add(this.Collect(id));
+            }
+            );
+            return videos;
+        }
+
     }
+
+
 }
