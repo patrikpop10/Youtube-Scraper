@@ -1,0 +1,13 @@
+﻿{
+  "profiles": {
+    "GrpcYoutubeServer": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "http://localhost:5117;https://localhost:7152",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

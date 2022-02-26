@@ -1,10 +1,10 @@
-def make_markov_model(cleaned_stories, n_gram=2):
+def make_markov_model(cleaned_text, n_gram=2):
     markov_model = {}
-    for i in range(len(cleaned_stories)-n_gram-1):
+    for i in range(len(cleaned_text)-n_gram-1):
         curr_state, next_state = "", ""
         for j in range(n_gram):
-            curr_state += cleaned_stories[i+j] + " "
-            next_state += cleaned_stories[i+j+n_gram] + " "
+            curr_state += cleaned_text[i+j] + " "
+            next_state += cleaned_text[i+j+n_gram] + " "
         curr_state = curr_state[:-1]
         next_state = next_state[:-1]
         if curr_state not in markov_model:
