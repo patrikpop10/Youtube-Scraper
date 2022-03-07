@@ -1,5 +1,5 @@
 # Youtube-Scrapper
-Youtube Scraper for analysis of the trending page 
+Youtube Scraper for analysis of the trending page\n
 
 Components:
   DONE:
