@@ -1,3 +1,4 @@
+#TODO: IMPLEMENT USING OOP
 def make_markov_model(cleaned_text, n_gram=2):
     markov_model = {}
     for i in range(len(cleaned_text)-n_gram-1):

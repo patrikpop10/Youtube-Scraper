@@ -43,19 +43,21 @@ namespace scrapperlib
             try
             {
                 var subsJObject = new JObject();
-                if (filterUser.OriginalJString == "")
+                if (filterUser.OriginalJString == "" || filterUser.OriginalJString.Contains("ytInitialPlayerResponse"))
                 {
                     subsJObject = JObject.Parse("{}");
                 }
                 else
                 {
+                   
                     subsJObject = JObject.Parse(filterUser.OriginalJString);
+
                 }
 
                 var subscriberCountText = subsJObject.SelectToken(ConfigurationRoot["video:jsonPaths:subscribers"]) ?? "";
                 var likes = subsJObject.SelectToken(ConfigurationRoot["video:jsonPaths:likes"]) ?? "";
                 var final = $"\n {iFrame} \n title: {title} \n description: {description} is family friendly: {isFamilyFriendly} \n number of views: {viewCount} \n publish date: {publishDate} \n category: {category} \n length in seconds: {lengthSeconds} \n {ownerChannelName}: {subscriberCountText}";
-                Console.WriteLine(final);
+                //Console.WriteLine(final);
 
                 //var finalObject = JObject.Parse($" \"iframe\": {iFrame}, \"title\": {title}, \"description\": {description}, \"familyFriendly\": {isFamilyFriendly}, \"viewCount\":{viewCount}, publishDate:{publishDate}, \"category\": {category}, \"lengthInSeconds\":{lengthSeconds}, \"channelName\": {ownerChannelName}, \"subscriberCountText\": {subscriberCountText}");
 
@@ -127,7 +129,7 @@ namespace scrapperlib
             ConfigurationRoot["trending:javascriptToRemove"],
             "contents.twoColumnBrowseResultsRenderer.tabs[*].tabRenderer.content.sectionListRenderer.contents[*].itemSectionRenderer.contents[*].gridRenderer.items[*].gridVideoRenderer.videoId", true);
             var videoIds = vf.SelectTokens("contents.twoColumnBrowseResultsRenderer.tabs[*].tabRenderer.content.sectionListRenderer.contents[*].itemSectionRenderer.contents[*].gridRenderer.items[*].gridVideoRenderer.videoId").Select(token => token.ToString()).ToList();
-            
+
             Parallel.ForEach(videoIds, id =>
             {
                 videos.Add(this.Collect(id));

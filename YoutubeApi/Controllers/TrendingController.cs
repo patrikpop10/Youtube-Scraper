@@ -13,6 +13,21 @@ namespace YoutubeApi.Controllers
         [HttpGet("{countryCode}/{ordered}")]
         public ActionResult<List<Video>> GetTrendingVideos(string countryCode, bool ordered)
         {
+            return GetVideos(countryCode, ordered);
+
+        }
+        [HttpGet]
+        public ActionResult<List<Video>> GetTrendingVideosFromDifferentCountries([FromQuery] List<string> countryCodes, [FromQuery] bool ordered)
+        {
+            List<Video> trendingFromDifferentCountries = new List<Video>();
+            foreach (var countryCode in countryCodes)
+            {
+                trendingFromDifferentCountries.AddRange(GetVideos(countryCode, ordered));
+            }
+            return trendingFromDifferentCountries;
+        }
+        private static List<Video> GetVideos(string countryCode, bool ordered)
+        {
             var videos = new List<Video>();
             var item = new Downloader(Program.configuration["trending:endPoint"] + countryCode);
             item.CountryCode = countryCode;
@@ -29,11 +44,12 @@ namespace YoutubeApi.Controllers
                     throw new Exception("Not the wanted country");
                 }
                 var videoIds = filter.Tokens.SelectTokens("trendingArray[*].videoRenderer.videoId").ToList();
-
+                videoIds = videoIds.Distinct().ToList();
                 if (ordered)
                 {
                     foreach (var id in videoIds)
                     {
+
                         Collector collector = new Collector(id.ToString(), countryCode, Program.configuration);
                         videos.Add(collector.Collect(id.ToString()));
                     }
@@ -46,11 +62,10 @@ namespace YoutubeApi.Controllers
                         videos.Add(collector.Collect(id.ToString()));
                     });
                 }
-
-
-
             }
             return videos;
         }
+
+
     }
 }

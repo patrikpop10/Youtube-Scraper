@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcYoutubeServer";
+
+
+
+service Video {
+    rpc GetVideoInfo (VideoRequest) returns (VideoData);
+}
+message VideoRequest{
+    string videoId = 1;
+}
+message VideoData{
+    string videoId = 1;
+    Uploader uploader = 2;
+    string length = 3;
+    string country = 4;
+    string uploadDate = 5;
+    bool isFamilyFriendly = 6;
+    string iFrame = 7;
+    string category = 8;
+    int64 views = 9;
+    string likes = 10;
+    string title = 11;
+    string description = 12;
+}
+message Uploader{
+    string name = 1;
+    string url = 2;
+    string subscribers = 3;
+}

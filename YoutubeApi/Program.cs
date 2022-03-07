@@ -3,11 +3,11 @@ namespace YoutubeApi
 {
     class Program
     {
-         public static IConfigurationRoot configuration = new ConfigurationBuilder()
-                                                                .SetBasePath(Directory.GetCurrentDirectory())
-                                                                .AddJsonFile("appsettings.json", false, true)
-                                                                .AddEnvironmentVariables()
-                                                                .Build(); 
+        public static IConfigurationRoot configuration = new ConfigurationBuilder()
+                                                               .SetBasePath(Directory.GetCurrentDirectory())
+                                                               .AddJsonFile("appsettings.json", false, true)
+                                                               .AddEnvironmentVariables()
+                                                               .Build();
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);

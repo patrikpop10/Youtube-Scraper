@@ -8,10 +8,17 @@
 
   <ItemGroup>
     <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\video.proto" GrpcServices= "Server"/>
+    <Protobuf Include="Protos\trending.proto" GrpcServices= "Server"/>
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" Version="2.40.0" />
+  </ItemGroup>
+    <ItemGroup>
+    <ProjectReference Include="..\database\database.csproj" />
+    <ProjectReference Include="..\scraperlib\scraperlib.csproj" />
+    <ProjectReference Include="..\scrapper\scrapper.csproj" />
   </ItemGroup>
 
 </Project>

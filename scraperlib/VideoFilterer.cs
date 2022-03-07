@@ -1,4 +1,5 @@
 using HtmlAgilityPack;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace scrapperlib
@@ -28,6 +29,7 @@ namespace scrapperlib
                 if (multiple)
                 {
                     var contents = ConvertToJson().SelectTokens(jsonPath);
+                    //FIXME:
                     var stringContent = contents.ToString();
                     json = JObject.Parse(stringContent);
                     return json;
@@ -44,7 +46,7 @@ namespace scrapperlib
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
             }
 
             return json;

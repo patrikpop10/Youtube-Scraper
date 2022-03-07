@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcYoutubeServer";
+
+import "Protos/video.proto";
+
+service Trending {
+    rpc GetTrendingVideos (TrendingRequest) returns (TrendingPageVideos);
+    rpc GetMultipleTrendingVideos (MultipleTrendingRequest) returns (TrendingPageVideos);
+}
+message TrendingRequest{
+    string trendingId = 1;
+}
+message TrendingPageVideos{
+    repeated VideoData VideoData = 1;
+}
+message MultipleTrendingRequest{
+    repeated TrendingRequest TrendingRequest = 1;
+}

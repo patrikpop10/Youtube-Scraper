@@ -1,0 +1,1 @@
+& C:/Users/User/AppData/Local/Programs/Python/Python310/python.exe -m grpc_tools.protoc -I D:/Projects/'Youtube Scrapper'/TitleGenerator/Protos  D:/Projects/'Youtube Scrapper'/TitleGenerator/Protos/video.proto --python_out=. --grpc_python_out=.
